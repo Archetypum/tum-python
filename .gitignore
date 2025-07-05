@@ -1,0 +1,32 @@
+# Python bytecode:
+__pycache__/
+*.pyc
+*.pyo
+*$py.class
+
+# Pyinstaller:
+dist/
+*.spec
+
+# Virtual environments:
+env/
+venv/
+pkgenv/
+.env/
+.venv/
+.pkgenv/
+
+# Vim:
+.vim/
+*.swp
+*.swo
+Session.vim
+
+# Temporary files:
+*~
+\#'
+\#'\#
+.#'
+
+# Motherfucking pycharm:
+.idea/

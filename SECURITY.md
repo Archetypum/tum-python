@@ -25,7 +25,7 @@ Currently, we don't have any known vulnerabilities...
 
 ## Recommendations on tum-python usage
 
-Be careful while using tum-python, it always work with root privileges,
+Be careful while using tum-python, it always works with root privileges,
 and we are not responsible for all your actions.
 
 DO NOT CHANGE anything in the code unless you know what you are doing.

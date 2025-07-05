@@ -48,7 +48,7 @@ try:
     from .apt_sortpkgs import *
     from .aptitude import *
     from .aptitude_create_state_bundle import *
-    from .dng import *
+    from .dnf import *
     from .dpkg import *
     from .guix import *
     from .homebrew import *

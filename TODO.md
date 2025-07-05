@@ -16,7 +16,7 @@
 
 ## Long-term
 
-2) Consider adding **pkg_admin**, **pkgtool**, **nix** pm support someday.
+1) Consider adding **pkg_admin**, **pkgtool**, **nix** pm support someday.
 
 2) Consider adding **GNU Shepherd**, **smf (service management facility)**, **upstart** init support someday.
 
