@@ -30,7 +30,7 @@ class Globals:
     #
     # `tum` version:
     #
-    VERSION: str = "0.1"
+    VERSION: str = "0.0.1-stable"
     
     #
     # ANSI Color codes and text formatting:
@@ -274,7 +274,7 @@ class Globals:
         # If you can dream it, Mac can do it.
         # <https://www.apple.com/macos>
         
-        "macos", "darwin",
+        "macos", "darwin", "xnu",
     ]
 
 
@@ -405,11 +405,12 @@ def get_user_distro() -> str | None:
         return name
 
 
+
 def get_pid1_comm() -> typing.Optional[str] | None:
     try:
-        with open("/proc/1/comm", "r") as f:
-            return f.read().strip()
-    except Exception:
+        result = subprocess.check_output(["ps", "-p", "1", "-o", "comm="], stderr=subprocess.DEVNULL)
+        return result.decode().strip()
+    except subprocess.CalledProcessError:
         return None
 
 

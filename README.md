@@ -2,9 +2,29 @@
 
 ![TheUnixManager](https://github.com/user-attachments/assets/6c0b3fbc-1d09-4d35-9dde-33b22a468c45)
 
-**Tum (TheUnixManager)** is a universal package management and initialization system library created by **Archetypum**, designed to simplify interaction with various UNIX-like systems and streamline the creation of system-related scripts.
+--- 
+
+## Overview
+
+Tum (TheUnixManager) is a universal package management and system initialization library created by Archetypum, designed to simplify interactions with UNIX-like systems and streamline the development of system-related python scripts.
 
 This is the Python implementation of `tum`.
+
+---
+
+## Table of contents
+
+- [Why?](#why)
+- [What does it solve?](#what-does-it-solve)
+- [Use Cases](#use-cases)
+- [Installation](#installation)
+- [Documentation](#documentation)
+- [Tests](#tests)
+- [Supported Package Management Utilities (35)](#supported-package-management-utilities-35)
+- [Supported Initialization Systems (7)](#supported-initialization-systems-7)
+- [Example Usage](#example-usage)
+- [Other Implementations by Archetypum](#other-implementations-by-archetypum)
+- [Legal](#legal)
 
 ---
 
@@ -12,22 +32,76 @@ This is the Python implementation of `tum`.
 
 Because interacting with countless package managers and init systems across UNIX-like platforms is painful — `tum` fixes that.
 
+With `tum`, you:
+
+1) Don't need to be a UNIX maniac who knows every package manager and init system syntax by heart;
+
+2) Don't waste time building utilities from scratch — core functions are prebuilt and ready;
+
+3) Don't write bloated, error-prone scripts — your code stays clean, readable, and portable.
+
+## What does it solve?
+
+Managing packages and system services is inconsistent across distros. Whether you're scripting for Arch, Debian, Void, Slackware, Red Hat, or others, `tum` provides a unified interface to abstract those differences.
+
+It gives you:
+
+1) A standardized way to install, remove, purge, update, upgrade packages (any many more!);
+
+2) Unified service control (status, start, stop, enable, etc.) across multiple init systems (and many more);
+
+3) A modular approach to extend support for more tools and distros;
+
+4) Shell-friendly integration for faster development and cleaner scripts.
+
+
+## Use Cases
+
+- Write portable installation scripts that “just work” on most UNIX-like systems;
+
+- Build lightweight system provisioning tools in pure python;
+
+- Create consistent automation for servers, containers, or virtual machines;
+
+- Prototype cross-distro sysadmin tools without rewriting core logic.
+
+`tum` executable consists of **1402 lines of code** (without empty lines and comments) that makes your code support 400+ GNU/Linux, BSD and macOS distros. That makes `tum` a _**very**_ small dependency in your project.
+
+Your users can install it in just three commands and forget about `tum` existence for forever, because their cross-platform scripts are working just like intended.
+
+_**So why not give it a shot?**_
+
 ---
 
 ## Installation
 
-### pip
+- Via `pip`:
 
 ```sh
 pip install the_unix_manager
 ```
 
-### Manual
+- Via Makefile:
 
 ```sh
 git clone https://github.com/Archetypum/tum-python.git
-cd tum-python
-...
+cd tum-python/
+
+sudo make install
+```
+
+## Documentation
+
+You can find `tum-python` documentation inside the `doc/` directory.
+
+## Tests
+
+You can find automatic tests inside the `t/` directory.
+
+If you want test your installation manually:
+
+```sh
+./autotests.sh
 ```
 
 ## Supported Package Management Utilities (35)
@@ -108,20 +182,20 @@ cd tum-python
 
 ### UNIX:
 
-```python3
-#!/usr/bin/python3
+```python
+
 ```
 
 ### Service Management:
 
-```python3
-#!/usr/bin/python3
+```python
+
 ```
 
 ### Package Management
 
-```python3
-#!/usr/bin/python3
+```python
+
 ```
 
 ## Other Implementations by Archetypum
@@ -133,8 +207,6 @@ cd tum-python
 - [_tum-raku_](https://github.com/Archetypum/tum-raku)
 
 - [_tum-c_](https://github.com/Archetypum/tum-c)
-
-- [_tum-lua_](https://github.com/Archetypum/tum-lua)
 
 - [_tum-rust_](https://github.com/Archetypum/tum-rust)
 
