@@ -279,143 +279,92 @@ class Globals:
 
 
 def is_debian_based(distro: str, base_distros: typing.List[str]) -> bool:
-    distro_lower: str = distro.lower()
-    for base_distro in base_distros:
-        if distro_lower == base_distro:
-            return True
-    return False
+    return distro.lower() in base_distros
 
 
 def is_arch_based(distro: str, base_distros: typing.List[str]) -> bool:
-    distro_lower: str = distro.lower()
-    for base_distro in base_distros:
-        if distro_lower == base_distro:
-            return True
-    return False
+    return distro.lower() in base_distros
 
 
 def is_alpine_based(distro: str, base_distros: typing.List[str]) -> bool:
-    distro_lower: str = distro.lower()
-    for base_distro in base_distros:
-        if distro_lower == base_distro:
-            return True
-    return False
+    return distro.lower() in base_distros
 
 
 def is_gentoo_based(distro: str, base_distros: typing.List[str]) -> bool:
-    distro_lower: str = distro.lower()
-    for base_distro in base_distros:
-        if distro_lower == base_distro:
-            return True
-    return False
+    return distro.lower() in base_distros
 
 
 def is_void_based(distro: str, base_distros: typing.List[str]) -> bool:
-    distro_lower: str = distro.lower()
-    for base_distro in base_distros:
-        if distro_lower == base_distro:
-            return True
-    return False
+    return distro.lower() in base_distros
 
 
 def is_dragora_based(distro: str, base_distros: typing.List[str]) -> bool:
-    distro_lower: str = distro.lower()
-    for base_distro in base_distros:
-        if distro_lower == base_distro:
-            return True
-    return False
+    return distro.lower() in base_distros
 
 
 def is_slackware_based(distro: str, base_distros: typing.List[str]) -> bool:
-    distro_lower: str = distro.lower()
-    for base_distro in base_distros:
-        if distro_lower == base_distro:
-            return True
-    return False
+    return distro.lower() in base_distros
 
 def is_redhat_based(distro: str, base_distros: typing.List[str]) -> bool:
-    distro_lower: str = distro.lower()
-    for base_distro in base_distros:
-        if distro_lower == base_distro:
-            return True
-    return False
+    return distro.lower() in base_distros
 
 
 def is_guix_based(distro: str, base_distros: typing.List[str]) -> bool:
-    distro_lower: str = distro.lower()
-    for base_distro in base_distros:
-        if distro_lower == base_distro:
-            return True
-    return False
+    return distro.lower() in base_distros
 
 
 def is_freebsd_based(distro: str, base_distros: typing.List[str]) -> bool:
-    distro_lower: str = distro.lower()
-    for base_distro in base_distros:
-        if distro_lower == base_distro:
-            return True
-    return False
+    return distro.lower() in base_distros
 
 
 def is_openbsd_based(distro: str, base_distros: typing.List[str]) -> bool:
-    distro_lower: str = distro.lower()
-    for base_distro in base_distros:
-        if distro_lower == base_distro:
-            return True
-    return False
+    return distro.lower() in base_distros
 
 
 def is_netbsd_based(distro: str, base_distros: typing.List[str]) -> bool:
-    distro_lower: str = distro.lower()
-    for base_distro in base_distros:
-        if distro_lower == base_distro:
-            return True
-    return False
+    return distro.lower() in base_distros
 
 
 def is_solaris_illumos_based(distro: str, base_distros: typing.List[str]) -> bool:
-    distro_lower: str = distro.lower()
-    for base_distro in base_distros:
-        if distro_lower == base_distro:
-            return True
-    return False
+    return distro.lower() in base_distros
 
 
 def is_macos_based(distro: str, base_distros: typing.List[str]) -> bool:
-    distro_lower: str = distro.lower()
-    for base_distro in base_distros:
-        if distro_lower == base_distro:
-            return True
-    return False
+    return distro.lower() in base_distros
 
 
-def get_user_distro() -> str | None:
+def get_user_distro() -> typing.Optional[str]:
     try:
+
         with open("/etc/os-release") as release_file:
             for line in release_file:
                 if line.startswith("ID_LIKE="):
-                    name: str = line.split("=")[1].strip().lower()
-                    return name
+                    return line.split("=", 1)[1].strip().lower()
                 if line.startswith("ID="):
-                    name: str = line.split("=")[1].strip().lower()
-                    return name
+                    return line.split("=", 1)[1].strip().lower()
+
     except FileNotFoundError:
-        print("[!] Error: Cannot detect distribution from /etc/os-release.")
-        name: str = input("[==>] Write your OS yourself: ").strip().lower()
-        return name
+        print(f"{Globals.RED}[!] Error: Cannot detect distribution from '/etc/os-release'.{Globals.RESET}")
+        while True:
+            name: str = input("[==>] Write your OS yourself: ").strip().lower()
+            if name and re.match(r"^[\w@.+:/=-]+$", name):
+                return name
+
+            print(f"{Globals.RED}[!] Invalid input. Please enter a valid distro name.{Globals.RESET}")
+
+    return None
 
 
-
-def get_pid1_comm() -> typing.Optional[str] | None:
+def get_pid1_comm() -> typing.Optional[str]:
     try:
         result = subprocess.check_output(["ps", "-p", "1", "-o", "comm="], stderr=subprocess.DEVNULL)
-        return result.decode().strip()
+        return result.decode("utf-8").strip()
     except subprocess.CalledProcessError:
         return None
 
 
 def get_init_system() -> str:
-    pid1_comm: str = get_pid1_comm()
+    pid1_comm: typing.Optional[str] = get_pid1_comm()
 
     if os.path.isdir("/run/systemd/system") or pid1_comm == "systemd":
         return "systemd"
@@ -441,13 +390,14 @@ def get_init_system() -> str:
     return "unknown"
 
 
-def clear_screen() -> typing.NoReturn:
-    clear_command: str = "clear"
+def clear_screen() -> None:
+    try:
+        subprocess.run(["clear"], check=True)
+    except (subprocess.CalledProcessError, FileNotFoundError):
+        print(f"{Globals.YELLOW}[!] Warning: Failed to clear the screen.{Globals.RESET}")
 
-    subprocess.run([clear_command], check=True)
 
-
-def prompt_user(prompt: str, default: str = "N") -> bool | None:
+def prompt_user(prompt: str, default: str = "N") -> bool:
     user_input: str = input(f"{prompt} (y/n): ").strip().lower()
 
     if not user_input:
