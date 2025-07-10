@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 #
+# `setup.py`
+#
 # Copyright (C) 2025 Archetypum
 #
 # This program is free software: you can redistribute it and/or modify
@@ -29,7 +31,7 @@ except ModuleNotFoundError as import_error:
     print(f"[!] Error: {import_error}")
     sys.exit(1)
 
-tum_name: str = "tum"
+tum_name: str = "theunixmanager"
 tum_version: str = "0.0.1"
 tum_license: str = "LGPL-3.0-or-later"
 tum_author: str = "Archetypum"
@@ -62,3 +64,4 @@ setup(
         "Topic :: Software Development :: Libraries",
     ],
 )
+ghkghjk

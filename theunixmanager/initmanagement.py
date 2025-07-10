@@ -1,4 +1,6 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
+#
+# `theunixmanager/initmanagement.py`
 #
 # Copyright (C) 2025 Archetypum
 #

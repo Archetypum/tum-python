@@ -1,5 +1,7 @@
 #!/usr/bin/python3
 #
+# `theunixmanager/__init__.py`
+#
 # Copyright (C) 2025 Archetypum
 #
 # This program is free software: you can redistribute it and/or modify
@@ -14,3 +16,27 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <https://www.gnu.org/licenses/>
+
+"""
+:authors: Archetypum
+:license: GNU Lesser General Public License v3, see LICENSE-LGPLv3.md file.
+
+:copyright: (c) 2025 Archetypum 
+"""
+
+try:
+    # UNIX:
+    from .unix import *
+
+    # Init systems:
+    from .initmanagement import *
+
+    # Package Managers:
+    from .packagemanagement import *
+except ModuleNotFoundError as import_error:
+    print(f"[!] Error: {import_error}")
+
+__author__: str = "Archetypum"
+__version__: str = "0.0.1"
+__email__: str = "archetypum@tutamail.com"
+
