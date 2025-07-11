@@ -65,12 +65,6 @@ It gives you:
 
 - Prototype cross-distro sysadmin tools without rewriting core logic.
 
-`tum` executable consists of **1402 lines of code** (without empty lines and comments) that makes your code support 400+ GNU/Linux, BSD and macOS distros. That makes `tum` a _**very**_ small dependency in your project.
-
-Your users can install it in just three commands and forget about `tum` existence for forever, because their cross-platform scripts are working just like intended.
-
-_**So why not give it a shot?**_
-
 ---
 
 ## Installation
@@ -81,18 +75,19 @@ _**So why not give it a shot?**_
 pip install the_unix_manager
 ```
 
-- Via Makefile:
+- Manual Bulinding:
 
 ```sh
 git clone https://github.com/Archetypum/tum-python.git
 cd tum-python/
 
-sudo make install
+pip install -r requirements.txt
+python3 setup.py
 ```
 
 ## Documentation
 
-You can find `tum-python` documentation inside the `doc/` directory.
+All `tum-python` functions, classes and methods have a lot of documentation. You can check it inside your code editor.
 
 ## Tests
 
@@ -101,7 +96,7 @@ You can find automatic tests inside the `t/` directory.
 If you want test your installation manually:
 
 ```sh
-./autotests.sh
+python3 autotests.py
 ```
 
 ## Supported Package Management Utilities (35)
@@ -205,6 +200,8 @@ If you want test your installation manually:
 - [_tum-perl_](https://github.com/Archetypum/tum-perl)
 
 - [_tum-raku_](https://github.com/Archetypum/tum-raku)
+
+- [_tum-lua_](https://github.com/Archetypum/tum-lua)
 
 - [_tum-c_](https://github.com/Archetypum/tum-c)
 

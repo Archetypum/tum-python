@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 #
 # Copyright (C) 2025 Archetypum
 #
@@ -274,66 +274,357 @@ class Globals:
         # If you can dream it, Mac can do it.
         # <https://www.apple.com/macos>
         
-        "macos", "darwin", "xnu",
+        "macos", "darwin", "xnu", "osx",
     ]
 
 
 def is_debian_based(distro: str, base_distros: typing.List[str]) -> bool:
+    """
+    Check if a given distribution is Debian-based.
+
+    Args:
+        distro (str): The name of the GNU/Linux distribution to check (e.g., "ubuntu", "debian").
+        base_distros (List[str]): A list of base distributions to compare against (typically lowercase names like ["debian", "ubuntu", "linuxmint"]).
+
+    Returns:
+        bool: True if the distro is in the base_distros list, False otherwise.
+
+    Example:
+        >>> base_list = ["debian", "ubuntu", "linuxmint"]
+        >>> is_debian_based("Ubuntu", base_list)
+        True
+
+        >>> is_debian_based("fedora", base_list)
+        False
+    """
+
     return distro.lower() in base_distros
 
 
 def is_arch_based(distro: str, base_distros: typing.List[str]) -> bool:
+    """
+    Check if a given distribution is Arch-based.
+
+    Args:
+        distro (str): The name of the GNU/Linux distribution to check (e.g., "arch", "artix").
+        base_distros (List[str]): A list of base distributions to compare against (typically lowercase names like ["arch", "artix", "archcraft"]).
+
+    Returns:
+        bool: True if the distro is in the base_distros list, False otherwise.
+
+    Example:
+        >>> base_list = ["arch", "artix", "archcraft"]
+        >>> is_arch_based("Arch", base_list)
+        True
+
+        >>> is_debian_based("fedora", base_list)
+        False
+    """
+
     return distro.lower() in base_distros
 
 
 def is_alpine_based(distro: str, base_distros: typing.List[str]) -> bool:
+    """
+    Check if a given distribution is Alpine-based.
+
+    Args:
+        distro (str): The name of the Linux distribution to check (e.g., "alpine", "postmarketos").
+        base_distros (List[str]): A list of base distributions to compare against (typically lowercase names like ["alpine", "postmartketos"]).
+
+    Returns:
+        bool: True if the distro is in the base_distros list, False otherwise.
+
+    Example:
+        >>> base_list = ["alpine", "postmarketos"]
+        >>> is_alpine_based("Alpine", base_list)
+        True
+
+        >>> is_alpine_based("fedora", base_list)
+        False
+    """
+
     return distro.lower() in base_distros
 
 
 def is_gentoo_based(distro: str, base_distros: typing.List[str]) -> bool:
+    """
+    Check if a given distribution is Gentoo-based.
+
+    Args:
+        distro (str): The name of the GNU/Linux distribution to check (e.g., "gentoo", "pentoo", "funtoo").
+        base_distros (List[str]): A list of base distributions to compare against (typically lowercase names like ["gentoo", "funtoo"]).
+
+    Returns:
+        bool: True if the distro is in the base_distros list, False otherwise.
+
+    Example:
+        >>> base_list = ["gentoo", "funtoo"]
+        >>> is_alpine_based("Gentoo", base_list)
+        True
+
+        >>> is_alpine_based("fedora", base_list)
+        False
+    """
+
     return distro.lower() in base_distros
 
 
 def is_void_based(distro: str, base_distros: typing.List[str]) -> bool:
+    """
+    Check if a given distribution is Void-based.
+
+    Args:
+        distro (str): The name of the GNU/Linux distribution to check (e.g., "void").
+        base_distros (List[str]): A list of base distributions to compare against (typically lowercase names like ["void", "projecttrident"]).
+
+    Returns:
+        bool: True if the distro is in the base_distros list, False otherwise.
+
+    Example:
+        >>> base_list = ["void", "projecttrident"]
+        >>> is_void_based("Void", base_list)
+        True
+
+        >>> is_void_based("ubuntu", base_list)
+        False
+    """
+
     return distro.lower() in base_distros
 
 
 def is_dragora_based(distro: str, base_distros: typing.List[str]) -> bool:
+    """
+    Check if a given distribution is Dragora-based.
+
+    Args:
+        distro (str): The name of the GNU/Linux distribution to check (e.g., "dragora").
+        base_distros (List[str]): A list of base distributions to compare against (typically lowercase names like ["dragora"]).
+
+    Returns:
+        bool: True if the distro is in the base_distros list, False otherwise.
+
+    Example:
+        >>> base_list = ["dragora"]
+        >>> is_dragora_based("Dragora", base_list)
+        True
+
+        >>> is_dragora_based("slackware", base_list)
+        False
+    """
+
     return distro.lower() in base_distros
 
 
 def is_slackware_based(distro: str, base_distros: typing.List[str]) -> bool:
+    """
+    Check if a given distribution is Slackware-based.
+
+    Args:
+        distro (str): The name of the GNU/Linux distribution to check (e.g., "slackware").
+        base_distros (List[str]): A list of base distributions to compare against (typically lowercase names like ["slackware", "slax", "zenwalk"]).
+
+    Returns:
+        bool: True if the distro is in the base_distros list, False otherwise.
+
+    Example:
+        >>> base_list = ["slackware", "slax", "zenwalk"]
+        >>> is_slackware_based("Slackware", base_list)
+        True
+
+        >>> is_slackware_based("debian", base_list)
+        False
+    """
+
     return distro.lower() in base_distros
 
+
 def is_redhat_based(distro: str, base_distros: typing.List[str]) -> bool:
+    """
+    Check if a given distribution is Red Hat-based.
+
+    Args:
+        distro (str): The name of the GNU/Linux distribution to check (e.g., "fedora", "centos").
+        base_distros (List[str]): A list of base distributions to compare against (typically lowercase names like ["redhat", "fedora", "centos", "rhel"]).
+
+    Returns:
+        bool: True if the distro is in the base_distros list, False otherwise.
+
+    Example:
+        >>> base_list = ["redhat", "fedora", "centos", "rhel"]
+        >>> is_redhat_based("Fedora", base_list)
+        True
+
+        >>> is_redhat_based("arch", base_list)
+        False
+    """
+
     return distro.lower() in base_distros
 
 
 def is_guix_based(distro: str, base_distros: typing.List[str]) -> bool:
+    """
+    Check if a given distribution is Guix-based.
+
+    Args:
+        distro (str): The name of the GNU/Linux distribution to check (e.g., "guix").
+        base_distros (List[str]): A list of base distributions to compare against (typically lowercase names like ["guix"]).
+
+    Returns:
+        bool: True if the distro is in the base_distros list, False otherwise.
+
+    Example:
+        >>> base_list = ["guix"]
+        >>> is_guix_based("Guix", base_list)
+        True
+
+        >>> is_guix_based("ubuntu", base_list)
+        False
+    """
+
     return distro.lower() in base_distros
 
 
 def is_freebsd_based(distro: str, base_distros: typing.List[str]) -> bool:
+    """
+    Check if a given distribution is FreeBSD-based.
+
+    Args:
+        distro (str): The name of the distribution to check (e.g., "freebsd", "ghostbsd").
+        base_distros (List[str]): A list of base distributions to compare against (typically lowercase names like ["freebsd", "ghostbsd", "midnightbsd"]).
+
+    Returns:
+        bool: True if the distro is in the base_distros list, False otherwise.
+
+    Example:
+        >>> base_list = ["freebsd", "ghostbsd", "midnightbsd"]
+        >>> is_freebsd_based("FreeBSD", base_list)
+        True
+
+        >>> is_freebsd_based("netbsd", base_list)
+        False
+    """
+
     return distro.lower() in base_distros
 
 
 def is_openbsd_based(distro: str, base_distros: typing.List[str]) -> bool:
+    """
+    Check if a given distribution is OpenBSD-based.
+
+    Args:
+        distro (str): The name of the distribution to check (e.g., "openbsd").
+        base_distros (List[str]): A list of base distributions to compare against (typically lowercase names like ["openbsd", "hyperbolabsd"]).
+
+    Returns:
+        bool: True if the distro is in the base_distros list, False otherwise.
+
+    Example:
+        >>> base_list = ["openbsd", "hyperbolabsd"]
+        >>> is_openbsd_based("OpenBSD", base_list)
+        True
+
+        >>> is_openbsd_based("netbsd", base_list)
+        False
+    """
+
     return distro.lower() in base_distros
 
 
 def is_netbsd_based(distro: str, base_distros: typing.List[str]) -> bool:
+    """
+    Check if a given distribution is NetBSD-based.
+
+    Args:
+        distro (str): The name of the distribution to check (e.g., "netbsd").
+        base_distros (List[str]): A list of base distributions to compare against (typically lowercase names like ["netbsd", "smolbsd"]).
+
+    Returns:
+        bool: True if the distro is in the base_distros list, False otherwise.
+
+    Example:
+        >>> base_list = ["netbsd", "smolbsd"]
+        >>> is_netbsd_based("NetBSD", base_list)
+        True
+
+        >>> is_netbsd_based("freebsd", base_list)
+        False
+    """
+
     return distro.lower() in base_distros
 
 
 def is_solaris_illumos_based(distro: str, base_distros: typing.List[str]) -> bool:
+    """
+    Check if a given distribution is Solaris/Illumos-based.
+
+    Args:
+        distro (str): The name of the distribution to check (e.g., "illumos", "openindiana").
+        base_distros (List[str]): A list of base distributions to compare against (typically lowercase names like ["solaris", "illumos", "openindiana"]).
+
+    Returns:
+        bool: True if the distro is in the base_distros list, False otherwise.
+
+    Example:
+        >>> base_list = ["solaris", "illumos", "openindiana"]
+        >>> is_solaris_illumos_based("illumos", base_list)
+        True
+
+        >>> is_solaris_illumos_based("debian", base_list)
+        False
+    """
+
     return distro.lower() in base_distros
 
 
 def is_macos_based(distro: str, base_distros: typing.List[str]) -> bool:
+    """
+    Check if a given system is macOS-based.
+
+    Args:
+        distro (str): The name of the operating system to check (e.g., "macos", "darwin").
+        base_distros (List[str]): A list of base systems to compare against (typically lowercase names like ["macos", "darwin", "osx"]).
+
+    Returns:
+        bool: True if the system is in the base_distros list, False otherwise.
+
+    Example:
+        >>> base_list = ["macos", "darwin", "osx"]
+        >>> is_macos_based("macOS", base_list)
+        True
+
+        >>> is_macos_based("linux", base_list)
+        False
+    """
+
     return distro.lower() in base_distros
 
 
 def get_user_distro() -> typing.Optional[str]:
+    """
+    Attempt to detect the user's operating system distribution.
+
+    This function tries to determine the distribution name by reading
+    from the `/etc/os-release` file. It first checks for the `ID_LIKE`
+    field (which provides a family-like identifier, e.g., "debian"),
+    and falls back to `ID` if `ID_LIKE` is not present.
+
+    If the file is missing or unreadable (e.g., on non-GNU/Linux systems),
+    the user is prompted to manually input the distribution name.
+    The input is validated to only contain safe characters.
+
+    Returns:
+        Optional[str]: The detected or user-provided distribution name in lowercase, or `None` if detection fails and user input is empty or invalid.
+
+    Example:
+        >>> get_user_distro()
+        'debian'
+
+        # If /etc/os-release is not available:
+        [==>] Write your OS yourself: Void
+        'void'
+    """
+
     try:
 
         with open("/etc/os-release") as release_file:
@@ -356,6 +647,23 @@ def get_user_distro() -> typing.Optional[str]:
 
 
 def get_pid1_comm() -> typing.Optional[str]:
+    """
+    Get the name of the command running as PID 1 (the init system).
+
+    This function uses the `ps` command to retrieve the `comm` (command name)
+    of the process with PID 1. This is commonly used to detect the init system
+    in use (e.g., "systemd", "init", "runit", "s6-svscan", etc.).
+
+    Returns:
+        Optional[str]: The command name of PID 1 if detected successfully, or None if the command fails.
+
+    Example:
+        >>> get_pid1_comm()
+        'systemd'
+    """
+
+    result: bytes
+
     try:
         result = subprocess.check_output(["ps", "-p", "1", "-o", "comm="], stderr=subprocess.DEVNULL)
         return result.decode("utf-8").strip()
@@ -364,8 +672,32 @@ def get_pid1_comm() -> typing.Optional[str]:
 
 
 def get_init_system() -> str:
-    pid1_comm: typing.Optional[str] = get_pid1_comm()
+    """
+    Detect the init system used by the current operating system.
 
+    This function attempts to determine the init system by:
+    - Checking the presence of well-known init-related directories.
+    - Using the command name of PID 1 (via `get_pid1_comm()`).
+
+    Returns:
+        str: The name of the detected init system. One of:
+            - "systemd"
+            - "openrc"
+            - "sysvinit"
+            - "s6"
+            - "runit"
+            - "dinit"
+            - "launchd"
+            - "unknown" (if none matched)
+
+    Example:
+        >>> get_init_system()
+        'systemd'
+    """
+
+    pid1_comm: typing.Optional[str]
+    
+    pid1_comm = get_pid1_comm()
     if os.path.isdir("/run/systemd/system") or pid1_comm == "systemd":
         return "systemd"
 
@@ -391,6 +723,20 @@ def get_init_system() -> str:
 
 
 def clear_screen() -> None:
+    """
+    Clear the terminal screen using the `clear` command.
+
+    This function attempts to run the `clear` command via subprocess.
+    If the command fails (e.g., command not found or subprocess error), it prints a warning message to the user.
+
+    Returns:
+        None
+
+    Example:
+        >>> clear_screen()
+        # Clears the terminal, or prints a warning if it fails.
+    """
+
     try:
         subprocess.run(["clear"], check=True)
     except (subprocess.CalledProcessError, FileNotFoundError):
@@ -398,15 +744,51 @@ def clear_screen() -> None:
 
 
 def prompt_user(prompt: str, default: str = "N") -> bool:
-    user_input: str = input(f"{prompt} (y/n): ").strip().lower()
+    """
+    Prompt the user with a yes/no question and return their response as a boolean.
 
+    If the user enters nothing, the `default` value is used instead.
+    Accepts flexible variations of "yes" (e.g., "y", "ye", "yes").
+
+    Args:
+        prompt (str): The prompt message to display to the user.
+        default (str): The default answer if the user provides no input. 
+                       Should be "y" or "n" (case-insensitive). Defaults to "N".
+
+    Returns:
+        bool: True if the user answered yes, False otherwise.
+
+    Example:
+        >>> prompt_user("Do you want to continue?", default="Y")
+        Do you want to continue? (y/n): y
+        True
+    """
+
+    user_input: str
+    
+    user_input = input(f"{prompt} (y/n): ").strip().lower()
     if not user_input:
-        user_input: str = default.lower()
+        user_input = default.lower()
 
     return user_input in ["y", "ye", "es", "yes"]
 
 
 def check_privileges() -> None:
+    """
+    Check if the script is running with root privileges.
+
+    This function verifies that the effective user ID is 0 (root).
+    If not, it prints an error message and exits the program with status code 1.
+
+    Returns:
+        None
+
+    Example:
+        >>> check_privileges()
+        [!] Error: This script requires root privileges to work.
+        # Script exits with code 1 if not run as root.
+    """
+
     if os.geteuid() != 0:
         print(f"{Globals.RED}[!] Error: This script requires root privileges to work.{Globals.RESET}")
         sys.exit(1)

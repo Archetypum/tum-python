@@ -1,6 +1,6 @@
-## Contributing to tum-python
+## Contributing to `tum-python`
 
-We appreciate contributing on tum-python, please, if you want to contribute read this file to know the main rules in code writing and code style.
+We appreciate contributing on `tum-python`, please, if you want to contribute read this file to know the main rules in code writing and code style.
 
 We appreciate contributing in:
 
@@ -14,7 +14,7 @@ We appreciate contributing in:
 
 Installation:
 
-You can see proper installation of tum-python in README.md.
+You can see proper installation of `tum-python` in README.md.
 
 OS: 
 
@@ -22,9 +22,11 @@ GNU/Linux, BSD
 
 ## Code writing
 
-Please consider next rules of writing if you want to help tum-python:
+Please consider next rules of writing if you want to help `tum-python`:
 
-- TODO: understand our rules of writing Bash.
+- PEP8;
+
+- Strict typing annotations.
 
 ## Pull Requests
 
@@ -59,7 +61,7 @@ To create a pull request in GitHub:
 
 ## Issues Tracker
 
-You can send the issue on GitHub tum-python in "Issues" -> "New Issue" -> "Submit New Issue"
+You can send the issue on GitHub `tum-python` in "Issues" -> "New Issue" -> "Submit New Issue"
 
 Provide us next information about your issue:
 

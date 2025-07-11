@@ -34,45 +34,141 @@ except ModuleNotFoundError as import_error:
 
 
 class TumExecutionError(Exception):
+    """
+    Base exception for errors raised by the Tum execution system.
+    
+    All execution-related exceptions should inherit from this class.
+    """
+
     pass
 
 
 class UnsafeInputError(TumExecutionError):
+    """
+    Raised when an unsafe or invalid argument is detected in the input.
+
+    Attributes:
+        arg (str): The argument that failed validation.
+    """
+
     arg: str
 
     def __init__(self, arg: str) -> None:
+        """
+        Initialize an UnsafeInputError.
+
+        Args:
+            arg (str): The unsafe or invalid argument.
+        """
+
         self.arg = arg
         super().__init__(f"Unsafe or invalid argument detected: '{arg}'")
 
 
 class CommandNotFoundError(TumExecutionError):
+    """
+    Raised when a specified command is not found in the system.
+
+    Attributes:
+        binary (str): The name of the missing executable.
+    """
+
     binary: str
 
     def __init__(self, binary: str) -> None:
+        """
+        Initialize a CommandNotFoundError.
+
+        Args:
+            binary (str): The command/executable that could not be found.
+        """
+
         self.binary = binary
         super().__init__(f"Command not found: '{binary}'")
 
 
 class ExecutionFailedError(TumExecutionError):
+    """
+    Raised when a subprocess command executes but fails (non-zero exit code).
+
+    Attributes:
+        cmd (List[str]): The command that was executed.
+        returncode (int): The exit code returned by the subprocess.
+        stdout (str): The standard output from the command.
+        stderr (str): The standard error from the command.
+    """
+
     cmd: typing.List[str]
     returncode: int
     stdout: str
     stderr: str
+    message: str
 
     def __init__(self, cmd: typing.List[str], returncode: int, stdout: str, stderr: str) -> None:
+        """
+        Initialize an ExecutionFailedError.
+
+        Args:
+            cmd (List[str]): The command that failed.
+            returncode (int): The exit code of the process.
+            stdout (str): Captured standard output.
+            stderr (str): Captured standard error.
+        """
+
         self.cmd = cmd
         self.returncode = returncode
         self.stdout = stdout
         self.stderr = stderr
-        message: str = f"Execution failed: {' '.join(cmd)}\nExit code: {returncode}\n{stderr.strip()}"
+        message = f"Execution failed: {' '.join(cmd)}\nExit code: {returncode}\n{stderr.strip()}"
         super().__init__(message)
 
 
 def is_safe_argument(arg: str) -> bool:
+    """
+    Validate if a given command-line argument is safe to use.
+
+    This uses a pre-defined regular expression pattern (SAFE_ARG_PATTERN)
+    to ensure the argument does not contain unsafe characters.
+
+    Args:
+        arg (str): The argument to validate.
+
+    Returns:
+        bool: True if the argument is safe, False otherwise.
+
+    Example:
+        >>> is_safe_argument("ls")
+        True
+
+        >>> is_safe_argument("rm -rf /")
+        False
+    """
+
     return bool(SAFE_ARG_PATTERN.fullmatch(arg))
 
 
 def validate_command(cmd: typing.List[str]) -> None:
+    """
+    Validate a list of command-line arguments before execution.
+
+    Ensures:
+    - The list is not empty
+    - Each argument matches the safety pattern
+
+    Args:
+        cmd (List[str]): The command to validate.
+
+    Raises:
+        UnsafeInputError: If any argument is missing or unsafe.
+
+    Example:
+        >>> validate_command(["ls", "-l"])
+        # Passes
+
+        >>> validate_command(["; rm -rf /"])
+        # Raises UnsafeInputError
+    """
+
     if not cmd:
         raise UnsafeInputError("Empty command list")
 
@@ -82,11 +178,40 @@ def validate_command(cmd: typing.List[str]) -> None:
 
 
 def safe_execute(cmd: typing.List[str]) -> None:
+    """
+    Safely execute a command in a subprocess with validation and error handling.
+
+    Steps:
+    - Validates the command using `validate_command()`
+    - Runs the command via `subprocess.run()`
+    - Captures and prints stdout
+    - Raises structured errors on failure
+
+    Args:
+        cmd (List[str]): The command to execute as a list of strings.
+
+    Raises:
+        UnsafeInputError: If the command contains invalid arguments.
+        CommandNotFoundError: If the command binary is not found.
+        ExecutionFailedError: If the command returns a non-zero exit code.
+
+    Example:
+        >>> safe_execute(["ls", "-l"])
+        [<==] Executing 'ls -l'...
+        total 0
+        [*] Success!
+    """
+    
     print(f"{GREEN}[<==] Executing '{' '.join(cmd)}'...{RESET}")
     validate_command(cmd)
 
     try:
-        result: subprocess.CompletedProcess[str] = subprocess.run(cmd, check=True, capture_output=True, text=True)
+        result: subprocess.CompletedProcess[str] = subprocess.run(
+            cmd,
+            check=True,
+            capture_output=True,
+            text=True
+        )
 
         if result.stdout:
             print(result.stdout)
@@ -97,7 +222,12 @@ def safe_execute(cmd: typing.List[str]) -> None:
         raise CommandNotFoundError(cmd[0])
 
     except subprocess.CalledProcessError as execution_error:
-        raise ExecutionFailedError(cmd, execution_error.returncode, execution_error.stdout, execution_error.stderr)
+        raise ExecutionFailedError(
+            cmd,
+            execution_error.returncode,
+            execution_error.stdout,
+            execution_error.stderr
+        )
 
 
 #

@@ -23,9 +23,8 @@
 :copyright: (c) 2025 Archetypum
 """
 
-import sys
-
 try:
+    import sys
     from setuptools import setup, find_packages
 except ModuleNotFoundError as import_error:
     print(f"[!] Error: {import_error}")
@@ -64,4 +63,3 @@ setup(
         "Topic :: Software Development :: Libraries",
     ],
 )
-ghkghjk
