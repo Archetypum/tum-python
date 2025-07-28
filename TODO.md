@@ -6,7 +6,7 @@
 
 2) Add illustrations;
 
-3) **FINISHED**!: Remaster `SECURITY.md`.
+3) **FINISHED**!: ~~Remaster `SECURITY.md`~~.
 
 4) **FINISHED!**: ~~Finish main UNIX module~~.
 

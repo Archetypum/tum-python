@@ -72,7 +72,7 @@ It gives you:
 - Via `pip`:
 
 ```sh
-pip install the_unix_manager
+pip install the_unix_manager  # WIP.
 ```
 
 - Manual Bulinding:
@@ -178,19 +178,25 @@ python3 autotests.py
 ### UNIX:
 
 ```python
+#!/usr/bin/env python3
 
+import theunixmanager as tum
 ```
 
 ### Service Management:
 
 ```python
+#!/usr/bin/env python3
 
+import theunixmanager as tum
 ```
 
 ### Package Management
 
 ```python
+#!/usr/bin/env python3
 
+import theunixmanager as tum
 ```
 
 ## Other Implementations by Archetypum
@@ -209,7 +215,7 @@ python3 autotests.py
 
 ## Legal
 
-**tum-python** is free software, released under the **GNU Lesser General Public License v3**.
+`tum-python` is free software, released under the **GNU Lesser General Public License v3**.
 
 See:
 

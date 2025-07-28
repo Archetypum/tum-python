@@ -285,4 +285,59 @@ class Systemd:
 
 
 class SysVinit:
-    ...
+    allowed_commands: typing.Dict[str, typing.Callable[[str], bool]]
+
+    def __init__(self) -> None:
+        self.allowed_commands = {
+            "start": self.start,
+            "stop": self.stop,
+            "restart": self.restart,
+            "reload": self.reload,
+            "force-reload": self.force_reload,
+            "try-restart": self.try_restart,
+            "status": self.status,
+        }
+
+    def _run(self, action: str, service: str) -> bool:
+        cmd: typing.List[str] 
+
+        cmd = ["service", service, action]
+
+        try:
+            subprocess.run(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, check=True)
+            print(f"{Colors.GREEN}[*] Success!{Colors.RESET}")
+            return True
+        except subprocess.CalledProcessError:
+            print(f"{Colors.RED}[!] Error: 'service {service} {action}' failed.{Colors.RESET}")
+            return False
+
+    def start(self, service: str) -> bool:
+        return self._run("start", service)
+
+    def stop(self, service: str) -> bool:
+        return self._run("stop", service)
+
+    def restart(self, service: str) -> bool:
+        return self._run("restart", service)
+
+    def reload(self, service: str) -> bool:
+        return self._run("reload", service)
+
+    def force_reload(self, service: str) -> bool:
+        return self._run("force-reload", service)
+
+    def try_restart(self, service: str) -> bool:
+        return self._run("try-restart", service)
+
+    def status(self, service: str) -> bool:
+        return self._run("status", service)
+
+    def execute(self, command: str, service: str) -> bool:
+        handler: typing.Optional[typing.Callable[[str], bool]]
+
+        handler = self.allowed_commands.get(command)
+        if handler is None:
+            print(f"{Colors.RED}[!] Error: Unsupported command: {command}{Colors.RESET}")
+            return False
+
+        return handler(service)
